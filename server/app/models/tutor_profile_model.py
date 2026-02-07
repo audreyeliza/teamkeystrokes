@@ -1,5 +1,4 @@
 # app/models/tutor_profile_model.py
-from bson import ObjectId
 from app.extensions import mongo
 
 def tutor_profiles():
@@ -18,20 +17,37 @@ def get_tutor_profile(user_id):
 
 def search_tutors(filters):
     query = {"is_active": True}
-    if "city" in filters:
-        query["city"] = filters["city"]
-    if "zip" in filters:
-        query["zip"] = filters["zip"]
-    if "subject" in filters:
-        query["subjects"] = filters["subject"]
-    if "age_group" in filters:
-        query["age_groups"] = filters["age_group"]
-    if "min_rate" in filters or "max_rate" in filters:
+
+    city = filters.get("city")
+    zip_code = filters.get("zip")
+    subject = filters.get("subject")
+    age_group = filters.get("age_group")
+    min_rate = filters.get("min_rate")
+    max_rate = filters.get("max_rate")
+
+    # case-insensitive city / zip
+    if city:
+        query["city"] = {"$regex": city, "$options": "i"}
+    if zip_code:
+        query["zip"] = {"$regex": zip_code, "$options": "i"}
+
+    # subject: matches element in subjects array
+    if subject:
+        query["subjects"] = subject
+
+    # age_group: matches element in age_groups array
+    if age_group:
+        query["age_groups"] = age_group
+
+    # hourly_rate range (field name matches save_profile)
+    if min_rate is not None or max_rate is not None:
         rate_q = {}
-        if "min_rate" in filters:
-            rate_q["$gte"] = filters["min_rate"]
-        if "max_rate" in filters:
-            rate_q["$lte"] = filters["max_rate"]
+        if min_rate is not None:
+            rate_q["$gte"] = float(min_rate)
+        if max_rate is not None:
+            rate_q["$lte"] = float(max_rate)
         query["hourly_rate"] = rate_q
+
+    print("MONGO QUERY:", query)  # optional debug
 
     return list(tutor_profiles().find(query))

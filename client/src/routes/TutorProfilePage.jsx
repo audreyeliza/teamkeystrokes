@@ -52,6 +52,32 @@ export default function TutorProfilePage() {
     alert("Profile saved");
   };
 
+  const handleSubjectsChange = (e) => {
+    const value = e.target.value;
+    setProfile((p) => {
+        const has = p.subjects.includes(value);
+        return {
+            ...p,
+            subjects: has
+                ? p.subjects.filter((s) => s !== value)
+                : [...p.subjects, value],
+        };
+    });
+  };
+
+  const handleAgeGroupsChange = (e) => {
+    const value = e.target.value;
+    setProfile((p) => {
+        const has = p.age_groups.includes(value);
+        return {
+            ...p,
+            age_groups: has
+                ? p.age_groups.filter((a) => a !== value)
+                : [...p.age_groups, value],
+        };
+    });
+  };
+
   return (
     <div style={{ padding: "2rem", maxWidth: 600, margin: "0 auto" }}>
       <h2>Tutor profile</h2>
@@ -72,6 +98,45 @@ export default function TutorProfilePage() {
             onChange={handleChange}
           />
         </div>
+        <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+                Subjects
+            </label>
+            <div className="flex flex-wrap gap-2">
+                {meta.subjects.map((s) => (
+                <label key={s} className="inline-flex items-center space-x-2">
+                    <input
+                    type="checkbox"
+                    value={s}
+                    checked={profile.subjects.includes(s)}
+                    onChange={handleSubjectsChange}
+                    />
+                    <span>{s}</span>
+                </label>
+                ))}
+            </div>
+        </div>
+
+        <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+                Age ranges
+            </label>
+                <div className="flex flex-wrap gap-2">
+                    {meta.age_groups.map((a) => (
+                    <label key={a} className="inline-flex items-center space-x-2">
+                        <input
+                        type="checkbox"
+                        value={a}
+                        checked={profile.age_groups.includes(a)}
+                        onChange={handleAgeGroupsChange}
+                        />
+                        <span>{a}</span>
+                    </label>
+                ))}
+            </div>
+        </div>
+
+
         <div style={{ marginTop: "0.5rem" }}>
           <label>Hourly rate</label>
           <input
