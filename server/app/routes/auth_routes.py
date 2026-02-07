@@ -3,9 +3,9 @@ from flask import Blueprint, request
 from flask_jwt_extended import (
     create_access_token,
 )
-from ..models.user_model import create_user, find_user_by_email
-from ..utils.security import hash_password, verify_password
-from ..config import Config
+from app.models.user_model import create_user, find_user_by_email
+from app.utils.security import hash_password, verify_password
+from app.config import Config
 
 auth_bp = Blueprint("auth", __name__)
 

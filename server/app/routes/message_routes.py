@@ -1,8 +1,8 @@
 # app/routes/message_routes.py
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from ..models.message_model import create_message, get_messages_for_match
-from ..models.match_request_model import get_match
+from app.models.message_model import create_message, get_messages_for_match
+from app.models.match_request_model import get_match
 
 message_bp = Blueprint("messages", __name__)
 

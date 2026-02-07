@@ -1,9 +1,10 @@
 # app/routes/tutor_routes.py
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
-from ..models.tutor_profile_model import upsert_tutor_profile, get_tutor_profile, search_tutors
-from ..models.user_model import find_user_by_id
-from ..config import Config
+from app.models.tutor_profile_model import upsert_tutor_profile, get_tutor_profile, search_tutors
+from app.models.user_model import find_user_by_id
+from app.config import Config
+
 
 tutor_bp = Blueprint("tutors", __name__)
 

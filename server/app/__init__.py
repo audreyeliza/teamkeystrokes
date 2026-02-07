@@ -3,11 +3,6 @@ from flask import Flask
 from flask_cors import CORS
 from .config import Config
 from .extensions import jwt, mongo
-from .routes.auth_routes import auth_bp
-from .routes.tutor_routes import tutor_bp
-from .routes.match_routes import match_bp
-from .routes.message_routes import message_bp
-from .routes.user_routes import user_bp
 
 def create_app():
     app = Flask(__name__)
@@ -24,6 +19,12 @@ def create_app():
         supports_credentials=True,
     )
 
+    from app.routes.auth_routes import auth_bp
+    from app.routes.tutor_routes import tutor_bp
+    from app.routes.match_routes import match_bp
+    from app.routes.message_routes import message_bp
+    from app.routes.user_routes import user_bp
+
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(tutor_bp, url_prefix="/api/tutors")
     app.register_blueprint(match_bp, url_prefix="/api/matches")
@@ -35,3 +36,4 @@ def create_app():
         return {"status": "ok"}
 
     return app
+    
