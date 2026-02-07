@@ -1,10 +1,11 @@
 # app/models/message_model.py
 from bson import ObjectId
 from flask import current_app
+from app.extensions import mongo
 from datetime import datetime
 
 def messages_col():
-    return current_app.extensions["pymongo"].db.messages
+    return mongo.db.tutor_profiles
 
 def create_message(match_id, sender_id, text):
     doc = {

@@ -1,15 +1,23 @@
 # app/routes/auth_routes.py
-from flask import Blueprint, request
-from flask_jwt_extended import (
-    create_access_token,
+from flask import Blueprint, request, jsonify
+from flask_cors import cross_origin
+
+from app.models.user_model import (
+    find_user_by_email,
+    create_user,
 )
-from app.models.user_model import create_user, find_user_by_email
-from app.utils.security import hash_password, verify_password
+from app.utils.security import (
+    hash_password,
+    verify_password,
+)
 from app.config import Config
+from app.extensions import jwt
+from flask_jwt_extended import create_access_token
 
 auth_bp = Blueprint("auth", __name__)
 
-@auth_bp.post("/register")
+@auth_bp.route("/register", methods=["POST", "OPTIONS"])
+@cross_origin()  # now uses global CORS settings
 def register():
     data = request.get_json() or {}
     required = ["name", "email", "password", "role", "city", "zip"]
@@ -44,7 +52,8 @@ def register():
         "age_groups": Config.AGE_GROUPS,
     }, 201
 
-@auth_bp.post("/login")
+@auth_bp.route("/login", methods=["POST", "OPTIONS"])
+@cross_origin()
 def login():
     data = request.get_json() or {}
     user = find_user_by_email(data.get("email"))

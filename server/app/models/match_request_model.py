@@ -1,9 +1,10 @@
 # app/models/match_request_model.py
 from bson import ObjectId
 from flask import current_app
+from app.extensions import mongo
 
 def matches_col():
-    return current_app.extensions["pymongo"].db.match_requests
+    return mongo.db.tutor_profiles
 
 def create_match(student_id, tutor_id):
     doc = {
