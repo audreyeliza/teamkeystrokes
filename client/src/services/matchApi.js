@@ -11,8 +11,8 @@ export async function getMyMatches() {
   return res.data; // { matches: [...] }
 }
 
+// status: "accepted" | "declined"
 export async function updateMatch(matchId, status) {
-  // status: "accepted" | "declined"
   const res = await api.patch(`/matches/${matchId}`, { status });
   return res.data;
 }

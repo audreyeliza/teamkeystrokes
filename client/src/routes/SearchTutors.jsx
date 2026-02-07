@@ -1,3 +1,4 @@
+// SearchTutors.jsx
 import React, { useEffect, useState } from "react";
 import FilterBar from "../components/FilterBar";
 import TutorCard from "../components/TutorCard";
@@ -14,31 +15,13 @@ export default function SearchTutors() {
   });
   const [tutors, setTutors] = useState([]);
 
-  // static lists for now; can later fetch from backend Config.SUBJECTS / AGE_GROUPS
-  const [subjects] = useState([
-    "Math",
-    "English",
-    "Science",
-    "History",
-    "Computer Science",
-    "Foreign Language",
-    "Test Prep",
-  ]);
-
-  const [ageGroups] = useState([
-    "elementary",
-    "middle",
-    "high",
-    "college",
-  ]);
-
   const handleSearch = async () => {
     const res = await searchTutors(filters);
     setTutors(res.tutors || []);
   };
 
   useEffect(() => {
-    // optional: initial fetch
+    // optional initial load
     // handleSearch();
   }, []);
 
@@ -49,8 +32,6 @@ export default function SearchTutors() {
         filters={filters}
         setFilters={setFilters}
         onSearch={handleSearch}
-        subjects={subjects}
-        ageGroups={ageGroups}
       />
       <div style={{ marginTop: "1rem" }}>
         {tutors.map((tutor) => (

@@ -1,51 +1,78 @@
-export default function FilterBar({ filters, setFilters, onSearch, subjects, ageGroups }) {
+// FilterBar.jsx
+import React, { useEffect, useState } from "react";
+import { getMetadata } from "../services/userApi";
+
+export default function FilterBar({ filters, setFilters, onSearch }) {
+  const [meta, setMeta] = useState({ subjects: [], age_groups: [] });
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const m = await getMetadata();
+        setMeta(m);
+      } catch (e) {
+        // ignore
+      }
+    }
+    load();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((f) => ({ ...f, [name]: value }));
+  };
+
   return (
-    <div>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
       <input
+        name="city"
         placeholder="City"
         value={filters.city}
-        onChange={e => setFilters(f => ({ ...f, city: e.target.value }))}
+        onChange={handleChange}
       />
       <input
+        name="zip"
         placeholder="ZIP"
         value={filters.zip}
-        onChange={e => setFilters(f => ({ ...f, zip: e.target.value }))}
+        onChange={handleChange}
       />
 
-      <select
-        value={filters.subject}
-        onChange={e => setFilters(f => ({ ...f, subject: e.target.value }))}
-      >
+      <select name="subject" value={filters.subject} onChange={handleChange}>
         <option value="">All subjects</option>
-        {subjects.map(s => (
-          <option key={s} value={s}>{s}</option>
+        {meta.subjects.map((s) => (
+          <option key={s} value={s}>
+            {s}
+          </option>
         ))}
       </select>
 
-      <select
-        value={filters.ageGroup}
-        onChange={e => setFilters(f => ({ ...f, ageGroup: e.target.value }))}
-      >
+      <select name="ageGroup" value={filters.ageGroup} onChange={handleChange}>
         <option value="">All ages</option>
-        {ageGroups.map(a => (
-          <option key={a} value={a}>{a}</option>
+        {meta.age_groups.map((a) => (
+          <option key={a} value={a}>
+            {a}
+          </option>
         ))}
       </select>
 
       <input
         type="number"
+        name="minRate"
         placeholder="Min rate"
         value={filters.minRate}
-        onChange={e => setFilters(f => ({ ...f, minRate: e.target.value }))}
+        onChange={handleChange}
       />
       <input
         type="number"
+        name="maxRate"
         placeholder="Max rate"
         value={filters.maxRate}
-        onChange={e => setFilters(f => ({ ...f, maxRate: e.target.value }))}
+        onChange={handleChange}
       />
 
-      <button onClick={onSearch}>Search</button>
+      <button type="button" onClick={onSearch}>
+        Search
+      </button>
     </div>
   );
 }
