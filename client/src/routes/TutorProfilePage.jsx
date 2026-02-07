@@ -1,5 +1,10 @@
+// TutorProfilePage.jsx
 import React, { useEffect, useState } from "react";
-import { getMyTutorProfile, saveTutorProfile, toggleTutorActive } from "../services/tutorApi";
+import {
+  getMyTutorProfile,
+  saveTutorProfile,
+  toggleTutorActive,
+} from "../services/tutorApi";
 import { getMetadata } from "../services/userApi";
 
 export default function TutorProfilePage() {
@@ -43,39 +48,46 @@ export default function TutorProfilePage() {
     setProfile((p) => ({ ...p, [name]: checked }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await saveTutorProfile(profile);
-    if (profile.is_active !== undefined) {
-      await toggleTutorActive(profile.is_active);
-    }
-    alert("Profile saved");
-  };
-
   const handleSubjectsChange = (e) => {
     const value = e.target.value;
     setProfile((p) => {
-        const has = p.subjects.includes(value);
-        return {
-            ...p,
-            subjects: has
-                ? p.subjects.filter((s) => s !== value)
-                : [...p.subjects, value],
-        };
+      const has = p.subjects.includes(value);
+      return {
+        ...p,
+        subjects: has
+          ? p.subjects.filter((s) => s !== value)
+          : [...p.subjects, value],
+      };
     });
   };
 
   const handleAgeGroupsChange = (e) => {
     const value = e.target.value;
     setProfile((p) => {
-        const has = p.age_groups.includes(value);
-        return {
-            ...p,
-            age_groups: has
-                ? p.age_groups.filter((a) => a !== value)
-                : [...p.age_groups, value],
-        };
+      const has = p.age_groups.includes(value);
+      return {
+        ...p,
+        age_groups: has
+          ? p.age_groups.filter((a) => a !== value)
+          : [...p.age_groups, value],
+      };
     });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      ...profile,
+      // ensure number so range filters work
+      hourly_rate: Number(profile.hourly_rate || 0),
+    };
+
+    await saveTutorProfile(payload);
+    if (profile.is_active !== undefined) {
+      await toggleTutorActive(profile.is_active);
+    }
+    alert("Profile saved");
   };
 
   return (
@@ -90,52 +102,49 @@ export default function TutorProfilePage() {
             onChange={handleChange}
           />
         </div>
+
         <div style={{ marginTop: "0.5rem" }}>
           <label>ZIP</label>
-          <input
-            name="zip"
-            value={profile.zip || ""}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-                Subjects
-            </label>
-            <div className="flex flex-wrap gap-2">
-                {meta.subjects.map((s) => (
-                <label key={s} className="inline-flex items-center space-x-2">
-                    <input
-                    type="checkbox"
-                    value={s}
-                    checked={profile.subjects.includes(s)}
-                    onChange={handleSubjectsChange}
-                    />
-                    <span>{s}</span>
-                </label>
-                ))}
-            </div>
+          <input name="zip" value={profile.zip || ""} onChange={handleChange} />
         </div>
 
         <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-                Age ranges
-            </label>
-                <div className="flex flex-wrap gap-2">
-                    {meta.age_groups.map((a) => (
-                    <label key={a} className="inline-flex items-center space-x-2">
-                        <input
-                        type="checkbox"
-                        value={a}
-                        checked={profile.age_groups.includes(a)}
-                        onChange={handleAgeGroupsChange}
-                        />
-                        <span>{a}</span>
-                    </label>
-                ))}
-            </div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Subjects
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {meta.subjects.map((s) => (
+              <label key={s} className="inline-flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  value={s}
+                  checked={profile.subjects.includes(s)}
+                  onChange={handleSubjectsChange}
+                />
+                <span>{s}</span>
+              </label>
+            ))}
+          </div>
         </div>
 
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Age ranges
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {meta.age_groups.map((a) => (
+              <label key={a} className="inline-flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  value={a}
+                  checked={profile.age_groups.includes(a)}
+                  onChange={handleAgeGroupsChange}
+                />
+                <span>{a}</span>
+              </label>
+            ))}
+          </div>
+        </div>
 
         <div style={{ marginTop: "0.5rem" }}>
           <label>Hourly rate</label>
@@ -146,6 +155,7 @@ export default function TutorProfilePage() {
             onChange={handleChange}
           />
         </div>
+
         <div style={{ marginTop: "0.5rem" }}>
           <label>Bio</label>
           <textarea
@@ -154,7 +164,7 @@ export default function TutorProfilePage() {
             onChange={handleChange}
           />
         </div>
-        {/* You and your teammates can style subjects/age_groups more nicely later */}
+
         <div style={{ marginTop: "0.5rem" }}>
           <label>Active</label>
           <input
@@ -164,6 +174,7 @@ export default function TutorProfilePage() {
             onChange={handleCheckboxChange}
           />
         </div>
+
         <button style={{ marginTop: "1rem" }} type="submit">
           Save profile
         </button>

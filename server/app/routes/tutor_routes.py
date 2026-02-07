@@ -64,8 +64,6 @@ def my_profile():
 
 @tutor_bp.get("/search")
 def search():
-    print("ARGS:", dict(request.args))
-
     city = request.args.get("city")
     zip_code = request.args.get("zip")
     subject = request.args.get("subject")
@@ -82,7 +80,6 @@ def search():
         filters["subject"] = subject
     if age_group:
         filters["age_group"] = age_group
-
     if min_rate_raw not in (None, "", "null"):
         filters["min_rate"] = float(min_rate_raw)
     if max_rate_raw not in (None, "", "null"):
@@ -90,7 +87,6 @@ def search():
 
     tutors = search_tutors(filters)
 
-    # join basic user info
     results = []
     for t in tutors:
         user = find_user_by_id(t["user_id"])
