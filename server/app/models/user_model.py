@@ -1,9 +1,9 @@
 # app/models/user_model.py
 from bson import ObjectId
-from flask import current_app
+from app.extensions import mongo  # use the shared PyMongo instance
 
 def users_collection():
-    return current_app.extensions["pymongo"].db.users
+    return mongo.db.users
 
 def create_user(data):
     users = users_collection()

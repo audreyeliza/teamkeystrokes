@@ -1,9 +1,9 @@
 # app/models/tutor_profile_model.py
 from bson import ObjectId
-from flask import current_app
+from app.extensions import mongo
 
 def tutor_profiles():
-    return current_app.extensions["pymongo"].db.tutor_profiles
+    return mongo.db.tutor_profiles
 
 def upsert_tutor_profile(user_id, data):
     col = tutor_profiles()
