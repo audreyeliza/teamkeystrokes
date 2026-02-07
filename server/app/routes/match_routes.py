@@ -1,7 +1,12 @@
 # app/routes/match_routes.py
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
-from ..models.match_request_model import create_match, get_matches_for_user, update_match_status, get_match
+from app.models.match_request_model import (
+    create_match,
+    get_matches_for_user,
+    update_match_status,
+    get_match,
+)
 
 match_bp = Blueprint("matches", __name__)
 
