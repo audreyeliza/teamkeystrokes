@@ -13,41 +13,56 @@ export default function TutorCard({ tutor }) {
   };
 
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        padding: "0.75rem",
-        marginBottom: "0.5rem",
-        backgroundColor: "#fff",
-      }}
-    >
-      {/* Name and Rate */}
-      <h3 style={{ marginTop: 0, marginBottom: "0.5rem" }}>
-        {tutor.name}{" "}
-        <span style={{ fontSize: "0.9rem", color: "#666" }}>
-          (${tutor.hourly_rate}/hr)
-        </span>
-      </h3>
+    <div className="ui-card">
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+        }}
+      >
+        <div>
+          <h3
+            style={{ marginTop: 0, marginBottom: "0.25rem", color: "#897e04" }}
+          >
+            {tutor.name}
+          </h3>
+          <span style={{ fontSize: "1rem", fontWeight: "bold", color: "#666" }}>
+            ${tutor.hourly_rate} / hr
+          </span>
+        </div>
+        <button
+          className="nav-btn"
+          style={{ padding: "8px 16px" }}
+          onClick={handleMatch}
+        >
+          Request Match
+        </button>
+      </div>
 
-      {/* Bio - Italicized to differentiate it */}
-      <p style={{ marginBottom: "0.75rem", fontStyle: "italic" }}>
-        {tutor.bio || "No bio available."}
+      <p style={{ margin: "1rem 0", fontStyle: "italic", color: "#555" }}>
+        "{tutor.bio || "No bio available."}"
       </p>
 
-      {/* Details Block - Spaced out clearly */}
-      <div style={{ marginBottom: "0.75rem" }}>
-        <p style={{ margin: "0 0 0.25rem 0" }}>
+      <div
+        style={{
+          fontSize: "0.9rem",
+          color: "#666",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "10px",
+        }}
+      >
+        <p style={{ margin: 0 }}>
           <strong>Location:</strong> {tutor.city}, {tutor.zip}
         </p>
-        <p style={{ margin: "0 0 0.25rem 0" }}>
+        <p style={{ margin: 0 }}>
           <strong>Subjects:</strong> {(tutor.subjects || []).join(", ")}
         </p>
         <p style={{ margin: 0 }}>
           <strong>Ages:</strong> {(tutor.age_groups || []).join(", ")}
         </p>
       </div>
-
-      <button onClick={handleMatch}>Request Match</button>
     </div>
   );
 }
