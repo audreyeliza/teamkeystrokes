@@ -5,7 +5,7 @@ from app.extensions import mongo
 from datetime import datetime
 
 def messages_col():
-    return mongo.db.tutor_profiles
+    return mongo.db.messages
 
 def create_message(match_id, sender_id, text):
     doc = {

@@ -25,10 +25,7 @@ export default function Navbar() {
               <Link to="/search">Search</Link>
             </>
           )}
-          <button
-            style={{ marginLeft: "1rem" }}
-            onClick={logout}
-          >
+          <button style={{ marginLeft: "1rem" }} onClick={logout}>
             Log out
           </button>
         </>

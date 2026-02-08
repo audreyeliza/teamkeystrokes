@@ -24,8 +24,8 @@ export default function MatchList({ matches, onUpdated }) {
       {matches.map((m) => (
         <li key={m.id} style={{ marginBottom: "0.75rem" }}>
           <span>
-            Match status: {m.status} (student {m.student_id}, tutor {m.tutor_id}
-            )
+            Match status: {m.status} (student {m.student_name}, tutor{" "}
+            {m.tutor_name})
           </span>
 
           {m.status === "pending" && (

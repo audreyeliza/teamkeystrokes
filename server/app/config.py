@@ -8,18 +8,18 @@ class Config:
     FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
 
     SUBJECTS = [
-        "Math",
-        "English",
+        "Mathematics",
+        "Language Arts",
         "Science",
-        "History",
+        "Social Studies",
         "Computer Science",
-        "Foreign Language",
+        "Spanish",
         "Test Prep",
     ]
 
     AGE_GROUPS = [
-        "elementary",
-        "middle",
-        "high",
-        "college",
+        "Elementary",
+        "Middle",
+        "High",
+        "College",
     ]
