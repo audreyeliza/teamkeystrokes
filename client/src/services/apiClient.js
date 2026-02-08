@@ -1,8 +1,10 @@
 // client/src/services/apiClient.js
 import axios from "axios";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 const api = axios.create({
-  baseURL: "http://127.0.0.1:5000/api", // Flask base URL
+  baseURL: API_BASE, // e.g. https://your-backend.onrender.com/api
 });
 
 // Attach token automatically if present
