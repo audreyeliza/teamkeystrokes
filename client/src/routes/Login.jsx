@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
@@ -16,7 +16,7 @@ export default function Login() {
     e.preventDefault();
     setError("");
     try {
-      const data = await login(form); // { user: { role } }
+      const data = await login(form);
       const role = data.user.role;
       if (role === "tutor") {
         navigate("/tutor/dashboard");
@@ -30,34 +30,89 @@ export default function Login() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "2rem auto" }}>
-      <h2>Log In</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email: </label>
+    <div className="ui-card" style={{ maxWidth: "450px", margin: "60px auto" }}>
+      <h2
+        style={{
+          color: "#897e04",
+          marginBottom: "1.5rem",
+          textAlign: "center",
+        }}
+      >
+        Welcome Back
+      </h2>
+
+      {error && (
+        <p
+          style={{
+            color: "#d9534f",
+            backgroundColor: "#fdf7f7",
+            padding: "10px",
+            borderRadius: "8px",
+            textAlign: "center",
+            fontSize: "0.9rem",
+          }}
+        >
+          {error}
+        </p>
+      )}
+
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+          <label style={{ fontWeight: "600" }}>Email Address</label>
           <input
             name="email"
             type="email"
+            placeholder="email@example.com"
             value={form.email}
             onChange={handleChange}
             required
           />
         </div>
-        <div style={{ marginTop: "0.5rem" }}>
-          <label>Password: </label>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+          <label style={{ fontWeight: "600" }}>Password</label>
           <input
             name="password"
             type="password"
+            placeholder="••••••••"
             value={form.password}
             onChange={handleChange}
             required
           />
         </div>
-        <button style={{ marginTop: "1rem" }} type="submit">
+
+        <button
+          className="nav-btn"
+          type="submit"
+          style={{ marginTop: "10px", width: "100%", padding: "12px" }}
+        >
           Log In
         </button>
       </form>
+
+      <p
+        style={{
+          textAlign: "center",
+          marginTop: "20px",
+          fontSize: "0.9rem",
+          color: "#666",
+        }}
+      >
+        Don't have an account?{" "}
+        <Link
+          to="/register"
+          style={{
+            color: "#897e04",
+            fontWeight: "bold",
+            textDecoration: "none",
+          }}
+        >
+          Sign Up
+        </Link>
+      </p>
     </div>
   );
 }

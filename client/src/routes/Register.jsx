@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function Register() {
@@ -24,10 +24,10 @@ export default function Register() {
     e.preventDefault();
     setError("");
     try {
-      const data = await register(form); // { user: { role } }
+      const data = await register(form);
       const role = data.user.role;
       if (role === "tutor") {
-        navigate("/tutor/profile"); // go set up tutor profile
+        navigate("/tutor/profile");
       } else {
         navigate("/student/dashboard");
       }
@@ -38,63 +38,137 @@ export default function Register() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "2rem auto" }}>
-      <h2>Create Account</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name: </label>
+    <div className="ui-card" style={{ maxWidth: "500px", margin: "40px auto" }}>
+      <h2
+        style={{
+          color: "#897e04",
+          marginBottom: "1.5rem",
+          textAlign: "center",
+        }}
+      >
+        Create Account
+      </h2>
+
+      {error && (
+        <p
+          style={{
+            color: "#d9534f",
+            backgroundColor: "#fdf7f7",
+            padding: "10px",
+            borderRadius: "8px",
+            textAlign: "center",
+            fontSize: "0.9rem",
+          }}
+        >
+          {error}
+        </p>
+      )}
+
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+          <label style={{ fontWeight: "600" }}>Full Name</label>
           <input
             name="name"
+            placeholder="John Doe"
             value={form.name}
             onChange={handleChange}
             required
           />
         </div>
-        <div style={{ marginTop: "0.5rem" }}>
-          <label>Email: </label>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+          <label style={{ fontWeight: "600" }}>Email Address</label>
           <input
             name="email"
             type="email"
+            placeholder="email@example.com"
             value={form.email}
             onChange={handleChange}
             required
           />
         </div>
-        <div style={{ marginTop: "0.5rem" }}>
-          <label>Password: </label>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+          <label style={{ fontWeight: "600" }}>Password</label>
           <input
             name="password"
             type="password"
+            placeholder="Minimum 6 characters"
             value={form.password}
             onChange={handleChange}
             required
           />
         </div>
-        <div style={{ marginTop: "0.5rem" }}>
-          <label>Role: </label>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+          <label style={{ fontWeight: "600" }}>I am a...</label>
           <select name="role" value={form.role} onChange={handleChange}>
-            <option value="student">Parent/Student</option>
-            <option value="tutor">Tutor</option>
+            <option value="student">Parent / Student</option>
+            <option value="tutor">Professional Tutor</option>
           </select>
         </div>
-        <div style={{ marginTop: "0.5rem" }}>
-          <label>City: </label>
-          <input
-            name="city"
-            value={form.city}
-            onChange={handleChange}
-            required
-          />
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "15px",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+            <label style={{ fontWeight: "600" }}>City</label>
+            <input
+              name="city"
+              placeholder="City"
+              value={form.city}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+            <label style={{ fontWeight: "600" }}>ZIP Code</label>
+            <input
+              name="zip"
+              placeholder="12345"
+              value={form.zip}
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
-        <div style={{ marginTop: "0.5rem" }}>
-          <label>ZIP: </label>
-          <input name="zip" value={form.zip} onChange={handleChange} required />
-        </div>
-        <button style={{ marginTop: "1rem" }} type="submit">
-          Sign Up
+
+        <button
+          className="nav-btn"
+          type="submit"
+          style={{ marginTop: "10px", width: "100%", padding: "12px" }}
+        >
+          Get Started
         </button>
       </form>
+
+      <p
+        style={{
+          textAlign: "center",
+          marginTop: "20px",
+          fontSize: "0.9rem",
+          color: "#666",
+        }}
+      >
+        Already have an account?{" "}
+        <Link
+          to="/login"
+          style={{
+            color: "#897e04",
+            fontWeight: "bold",
+            textDecoration: "none",
+          }}
+        >
+          Log In
+        </Link>
+      </p>
     </div>
   );
 }
