@@ -57,30 +57,29 @@ From the `server/` directory:
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
+```
+
 Set any required environment variables (e.g., MongoDB URI, JWT secret) in your preferred way (environment or .env).
 
 Run the backend:
 
-bash
-flask run  # or python -m flask run, depending on your setup
+```bash
+flask run # or python -m flask run, depending on your setup
+```
+
 The API will typically run on http://localhost:5000.
 
 Frontend Setup (React + Vite)
 From the client/ directory:
 
-bash
+```bash
 npm install
 npm run dev
+```
+
 By default, Vite will start the frontend on http://localhost:5173 (or the next available port).
 
 Make sure the frontend API base URLs in src/services/ point to your local backend (e.g., http://localhost:5000).
 
 About TutorMatch
 After seeing inefficient and disconnected communication in freelance tutoring, Audrey Bolyard, Rashi Sharma, and Anishka Chokshi created TutorMatch as a one-stop platform for tutors and students. The goal is to make tutoring more transparent, efficient, and community-focused so that finding the right tutor feels easier than the subject itself.
-
-text
-
-4. Replace `https://YOUR-DEPLOY-URL-HERE` with your actual Render/Deploy URL.
-5. Commit and push: `git add README.md && git commit -m "Update README" && git push`.
-6. On GitHub, the repo homepage will automatically show the formatted README.
-```
