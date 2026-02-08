@@ -69,8 +69,9 @@ flask run # or python -m flask run, depending on your setup
 
 The API will typically run on http://localhost:5000.
 
-Frontend Setup (React + Vite)
-From the client/ directory:
+### Frontend Setup (React + Vite)
+
+From the `client/` directory:
 
 ```bash
 npm install
@@ -81,5 +82,6 @@ By default, Vite will start the frontend on http://localhost:5173 (or the next a
 
 Make sure the frontend API base URLs in src/services/ point to your local backend (e.g., http://localhost:5000).
 
-About TutorMatch
+### About TutorMatch
+
 After seeing inefficient and disconnected communication in freelance tutoring, Audrey Bolyard, Rashi Sharma, and Anishka Chokshi created TutorMatch as a one-stop platform for tutors and students. The goal is to make tutoring more transparent, efficient, and community-focused so that finding the right tutor feels easier than the subject itself.
