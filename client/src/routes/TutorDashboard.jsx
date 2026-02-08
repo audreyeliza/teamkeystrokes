@@ -1,4 +1,3 @@
-// client/src/pages/TutorDashboard.jsx
 import React, { useEffect, useState } from "react";
 import { getMyMatches } from "../services/matchApi";
 import MatchList from "../components/MatchList";
@@ -7,8 +6,12 @@ export default function TutorDashboard() {
   const [matches, setMatches] = useState([]);
 
   const load = async () => {
-    const res = await getMyMatches();
-    setMatches(res.matches || []);
+    try {
+      const res = await getMyMatches();
+      setMatches(res.matches || []);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   useEffect(() => {
@@ -16,9 +19,11 @@ export default function TutorDashboard() {
   }, []);
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>Dashboard</h2>
-      <MatchList matches={matches} onUpdated={load} />
+    <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+      <h2 style={{ color: "#897e04", marginBottom: "2rem" }}>
+        Tutor Management Dashboard
+      </h2>
+      <MatchList matches={matches} onUpdated={load} userRole="tutor" />
     </div>
   );
 }

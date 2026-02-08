@@ -1,48 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { getMyMatches } from "../services/matchApi";
+import MatchList from "../components/MatchList";
 
 export default function StudentDashboard() {
   const [matches, setMatches] = useState([]);
-  const navigate = useNavigate();
+
+  const load = async () => {
+    try {
+      const res = await getMyMatches();
+      setMatches(res.matches || []);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   useEffect(() => {
-    async function load() {
-      try {
-        const res = await getMyMatches();
-        setMatches(res.matches || []);
-      } catch (e) {
-        console.error(e);
-      }
-    }
     load();
   }, []);
 
-  const goToChat = (matchId) => {
-    navigate(`/matches/${matchId}/chat`);
-  };
-
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>Dashboard</h2>
-      {matches.length === 0 && <p>No matches yet.</p>}
-      <ul>
-        {matches.map((m) => (
-          <li key={m.id} style={{ marginBottom: "0.75rem" }}>
-            <span>
-              Tutor chat with {m.tutor_name} – {m.status}
-            </span>
-            {m.status === "accepted" && (
-              <button
-                style={{ marginLeft: "0.5rem" }}
-                onClick={() => goToChat(m.id)}
-              >
-                Open Chat
-              </button>
-            )}
-          </li>
-        ))}
-      </ul>
+    <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+      <h2 style={{ color: "#897e04", marginBottom: "2rem" }}>
+        Your Learning Dashboard
+      </h2>
+      <MatchList matches={matches} onUpdated={load} userRole="student" />
     </div>
   );
 }
