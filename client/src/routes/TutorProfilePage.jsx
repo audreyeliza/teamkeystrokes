@@ -1,4 +1,3 @@
-// TutorProfilePage.jsx
 import React, { useEffect, useState } from "react";
 import {
   getMyTutorProfile,
@@ -79,7 +78,6 @@ export default function TutorProfilePage() {
 
     const payload = {
       ...profile,
-      // ensure number so range filters work
       hourly_rate: Number(profile.hourly_rate || 0),
     };
 
@@ -91,92 +89,200 @@ export default function TutorProfilePage() {
   };
 
   return (
-    <div style={{ padding: "2rem", maxWidth: 600, margin: "0 auto" }}>
-      <h2>Profile</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="ui-card" style={{ maxWidth: "700px", margin: "40px auto" }}>
+      <h2 style={{ color: "var(--brand-gold)", marginBottom: "1.5rem" }}>
+        Tutor Profile Settings
+      </h2>
+
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+      >
+        {/* Location Section */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "15px",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+            <label style={{ fontWeight: "600", fontSize: "0.9rem" }}>
+              City
+            </label>
+            <input
+              name="city"
+              placeholder="e.g. New York"
+              value={profile.city || ""}
+              onChange={handleChange}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+            <label style={{ fontWeight: "600", fontSize: "0.9rem" }}>
+              ZIP Code
+            </label>
+            <input
+              name="zip"
+              placeholder="10001"
+              value={profile.zip || ""}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        {/* Subjects Section */}
         <div>
-          <label>City: </label>
-          <input
-            name="city"
-            value={profile.city || ""}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div style={{ marginTop: "0.5rem" }}>
-          <label>ZIP: </label>
-          <input name="zip" value={profile.zip || ""} onChange={handleChange} />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Subjects:
+          <label
+            style={{
+              fontWeight: "600",
+              fontSize: "0.9rem",
+              display: "block",
+              marginBottom: "10px",
+            }}
+          >
+            Subjects You Teach:
           </label>
-          <div className="flex flex-wrap gap-2">
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
             {meta.subjects.map((s) => (
-              <label key={s} className="inline-flex items-center space-x-2">
+              <label
+                key={s}
+                className="chat-bubble"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  margin: 0,
+                  cursor: "pointer",
+                  borderLeft: profile.subjects.includes(s)
+                    ? "3px solid var(--brand-gold)"
+                    : "3px solid transparent",
+                }}
+              >
                 <input
                   type="checkbox"
                   value={s}
                   checked={profile.subjects.includes(s)}
                   onChange={handleSubjectsChange}
                 />
-                <span>{s}</span>
+                <span style={{ fontSize: "0.85rem" }}>{s}</span>
               </label>
             ))}
           </div>
         </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Age Groups:
+        {/* Age Groups Section */}
+        <div>
+          <label
+            style={{
+              fontWeight: "600",
+              fontSize: "0.9rem",
+              display: "block",
+              marginBottom: "10px",
+            }}
+          >
+            Target Age Groups:
           </label>
-          <div className="flex flex-wrap gap-2">
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
             {meta.age_groups.map((a) => (
-              <label key={a} className="inline-flex items-center space-x-2">
+              <label
+                key={a}
+                className="chat-bubble"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  margin: 0,
+                  cursor: "pointer",
+                  borderLeft: profile.age_groups.includes(a)
+                    ? "3px solid var(--brand-gold)"
+                    : "3px solid transparent",
+                }}
+              >
                 <input
                   type="checkbox"
                   value={a}
                   checked={profile.age_groups.includes(a)}
                   onChange={handleAgeGroupsChange}
                 />
-                <span>{a}</span>
+                <span style={{ fontSize: "0.85rem" }}>{a}</span>
               </label>
             ))}
           </div>
         </div>
 
-        <div style={{ marginTop: "0.5rem" }}>
-          <label>Hourly Rate: </label>
-          <input
-            name="hourly_rate"
-            type="number"
-            value={profile.hourly_rate || ""}
-            onChange={handleChange}
-          />
+        {/* Rate and Status Section */}
+        <div style={{ display: "flex", alignItems: "flex-end", gap: "20px" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "5px",
+              flex: 1,
+            }}
+          >
+            <label style={{ fontWeight: "600", fontSize: "0.9rem" }}>
+              Hourly Rate ($)
+            </label>
+            <input
+              name="hourly_rate"
+              type="number"
+              placeholder="45"
+              value={profile.hourly_rate || ""}
+              onChange={handleChange}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              padding: "10px 15px",
+              background: "#f9f9f7",
+              borderRadius: "8px",
+              border: "1px solid #eee",
+            }}
+          >
+            <input
+              type="checkbox"
+              id="active-toggle"
+              name="is_active"
+              checked={profile.is_active ?? true}
+              onChange={handleCheckboxChange}
+            />
+            <label
+              htmlFor="active-toggle"
+              style={{
+                fontWeight: "600",
+                fontSize: "0.85rem",
+                cursor: "pointer",
+              }}
+            >
+              Profile Visible
+            </label>
+          </div>
         </div>
 
-        <div style={{ marginTop: "0.5rem" }}>
-          <label>Bio: </label>
+        {/* Bio Section */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+          <label style={{ fontWeight: "600", fontSize: "0.9rem" }}>
+            Professional Bio
+          </label>
           <textarea
             name="bio"
+            rows="5"
+            placeholder="Describe your tutoring style and experience..."
             value={profile.bio || ""}
             onChange={handleChange}
+            style={{ resize: "vertical" }}
           />
         </div>
 
-        <div style={{ marginTop: "0.5rem" }}>
-          <label>Active</label>
-          <input
-            type="checkbox"
-            name="is_active"
-            checked={profile.is_active ?? true}
-            onChange={handleCheckboxChange}
-          />
-        </div>
-
-        <button style={{ marginTop: "1rem" }} type="submit">
-          Save Profile
+        <button
+          className="nav-btn"
+          style={{ marginTop: "10px", padding: "12px" }}
+          type="submit"
+        >
+          Save Profile Changes
         </button>
       </form>
     </div>
