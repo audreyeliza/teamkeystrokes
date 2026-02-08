@@ -10,7 +10,7 @@ export default function Navbar() {
       {/* Brand Logo / Name */}
       <Link to="/" className="nav-logo" style={{ textDecoration: "none" }}>
         <span
-          style={{ fontSize: "1.5rem", fontWeight: "800", color: "#897e04" }}
+          style={{ fontSize: "1.5rem", fontWeight: "800", color: "#9f8813" }}
         >
           TutorMatch
         </span>

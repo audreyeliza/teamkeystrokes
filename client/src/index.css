@@ -69,21 +69,22 @@ body {
   transform: translateY(-150%);
   position: relative;
   margin: 0 auto;
-  border: 5px solid #897e04;
+  border: 5px solid #9f8813;
   width: 100px;
   height: 60px;
   border-radius: 5px;
 }
+
 .book__page {
   position: absolute;
   left: 50%;
   top: -5px;
   margin: 0 auto;
   border-radius: 5px;
-  border-top: 5px solid #897e04;
-  border-bottom: 5px solid #897e04;
-  border-right: 5px solid #897e04;
-  background: solid #897e04;
+  border-top: 5px solid #9f8813;
+  border-bottom: 5px solid #9f8813;
+  border-right: 5px solid #9f8813;
+  background: solid #9f8813;
   width: 50px;
   height: 60px;
   transform-origin: 0% 50%;
@@ -122,14 +123,14 @@ body {
 
   100% {
     transform: perspective(200px) rotateY(-180deg);
-    background: #897e04;
+    background: #9f8813;
   }
 }
 
 /* index.css additions */
 
 :root {
-  --brand-gold: #897e04;
+  --brand-gold: #9f8813;
   --light-bg: #fdfdfb;
   --border-color: #e2e2d5;
 }
@@ -192,7 +193,7 @@ body {
 
 /* index.css */
 .nav-btn {
-  background-color: #897e04; /* Your brand gold */
+  background-color: #9f8813; /* Your brand gold */
   color: white !important; /* Ensure text is white */
   padding: 12px 24px;
   border-radius: 8px;
@@ -206,7 +207,7 @@ body {
 }
 
 .nav-btn:hover {
-  background-color: #6d6403; /* Slightly darker on hover */
+  background-color: #9f8813; /* Slightly darker on hover */
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(137, 126, 4, 0.2);
 }
