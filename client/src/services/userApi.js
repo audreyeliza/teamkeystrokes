@@ -8,5 +8,5 @@ export async function getCurrentUser() {
 
 export async function getMetadata() {
   const res = await api.get("/users/metadata");
-  return res.data; // { subjects, age_groups }
+  return res.data;
 }
