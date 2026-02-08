@@ -23,7 +23,7 @@ export default function TutorCard({ tutor }) {
       >
         <div>
           <h3
-            style={{ marginTop: 0, marginBottom: "0.25rem", color: "#897e04" }}
+            style={{ marginTop: 0, marginBottom: "0.25rem", color: "#9f8813" }}
           >
             {tutor.name}
           </h3>

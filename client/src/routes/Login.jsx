@@ -33,7 +33,7 @@ export default function Login() {
     <div className="ui-card" style={{ maxWidth: "450px", margin: "60px auto" }}>
       <h2
         style={{
-          color: "#897e04",
+          color: "#9f8813",
           marginBottom: "1.5rem",
           textAlign: "center",
         }}
@@ -105,7 +105,7 @@ export default function Login() {
         <Link
           to="/register"
           style={{
-            color: "#897e04",
+            color: "#9f8813",
             fontWeight: "bold",
             textDecoration: "none",
           }}

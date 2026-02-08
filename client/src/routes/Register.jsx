@@ -41,7 +41,7 @@ export default function Register() {
     <div className="ui-card" style={{ maxWidth: "500px", margin: "40px auto" }}>
       <h2
         style={{
-          color: "#897e04",
+          color: "#9f8813",
           marginBottom: "1.5rem",
           textAlign: "center",
         }}
@@ -161,7 +161,7 @@ export default function Register() {
         <Link
           to="/login"
           style={{
-            color: "#897e04",
+            color: "#9f8813",
             fontWeight: "bold",
             textDecoration: "none",
           }}
