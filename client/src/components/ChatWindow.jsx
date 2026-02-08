@@ -57,25 +57,18 @@ export default function ChatWindow({
           paddingRight: "10px",
           display: "flex",
           flexDirection: "column",
-          gap: "12px",
+          gap: "8px", // Slightly tighter gap for a cleaner look
         }}
       >
         {messages.map((msg) => {
-          // Check if the message is from the student
           const isStudent = msg.sender_id === studentId;
-          const displayName = isStudent ? studentName : tutorName;
-
-          // Logic for bubble placement:
-          // You could further refine this by passing the 'currentUser' ID from AuthContext
-          // to align "your" messages to the right.
-          // For now, we'll keep it simple with your existing props.
 
           return (
             <div
               key={msg.id || msg._id}
               style={{
                 alignSelf: isStudent ? "flex-start" : "flex-end",
-                maxWidth: "80%",
+                maxWidth: "75%",
               }}
             >
               <div
@@ -89,21 +82,13 @@ export default function ChatWindow({
                   borderRight: !isStudent
                     ? "4px solid #897e04"
                     : "1px solid #eee",
-                  textAlign: isStudent ? "left" : "right",
                   boxShadow: "0 2px 5px rgba(0,0,0,0.02)",
+                  textAlign: "left", // Keeping text left-aligned inside bubbles for readability
                 }}
               >
-                <strong
-                  style={{
-                    color: "#897e04",
-                    fontSize: "0.75rem",
-                    display: "block",
-                    marginBottom: "4px",
-                  }}
-                >
-                  {displayName}
-                </strong>
-                <div style={{ fontSize: "0.95rem" }}>{msg.text}</div>
+                <div style={{ fontSize: "1rem", lineHeight: "1.4" }}>
+                  {msg.text}
+                </div>
               </div>
             </div>
           );
