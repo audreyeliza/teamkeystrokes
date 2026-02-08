@@ -35,16 +35,6 @@ export default function ChatWindow({
 
   return (
     <div className="ui-card">
-      <h3
-        style={{
-          marginBottom: "20px",
-          borderBottom: "1px solid #eee",
-          paddingBottom: "10px",
-        }}
-      >
-        Chat with {studentName}
-      </h3>
-
       <div
         style={{
           marginBottom: "1.5rem",
