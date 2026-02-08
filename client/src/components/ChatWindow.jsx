@@ -14,7 +14,7 @@ export default function ChatWindow({
   useEffect(() => {
     async function loadMessages() {
       try {
-        const data = await getMessages(matchId); // { messages: [...] }
+        const data = await getMessages(matchId);
         setMessages(data.messages || []);
       } catch (err) {
         console.error("Failed to load messages", err);
@@ -25,7 +25,7 @@ export default function ChatWindow({
 
   const handleSend = async (text) => {
     try {
-      await sendMessage(matchId, text); // { id }
+      await sendMessage(matchId, text);
       const data = await getMessages(matchId);
       setMessages(data.messages || []);
     } catch (err) {
@@ -34,18 +34,40 @@ export default function ChatWindow({
   };
 
   return (
-    <div>
-      <div style={{ marginBottom: "1rem" }}>
-        {messages.map((msg) => {
-          const isStudent = msg.sender_id === studentId;
-          const displayName = isStudent ? studentName : tutorName;
+    <div className="ui-card">
+      <h3
+        style={{
+          marginBottom: "20px",
+          borderBottom: "1px solid #eee",
+          paddingBottom: "10px",
+        }}
+      >
+        Chat with {studentName}
+      </h3>
 
-          return (
-            <div key={msg.id || msg._id}>
-              {displayName}: {msg.text}
-            </div>
-          );
-        })}
+      <div
+        style={{
+          marginBottom: "1.5rem",
+          maxHeight: "400px",
+          overflowY: "auto",
+        }}
+      >
+        {messages.length === 0 ? (
+          <p style={{ color: "#999" }}>No messages yet...</p>
+        ) : (
+          messages.map((msg) => {
+            const isStudent = msg.sender_id === studentId;
+            const displayName = isStudent ? studentName : tutorName;
+            return (
+              <div key={msg.id || msg._id} className="chat-bubble">
+                <small style={{ color: "#897e04", fontWeight: "bold" }}>
+                  {displayName}
+                </small>
+                <div style={{ marginTop: "4px" }}>{msg.text}</div>
+              </div>
+            );
+          })
+        )}
       </div>
 
       <MessageInput onSend={handleSend} />
