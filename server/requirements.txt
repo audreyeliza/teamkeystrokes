@@ -5,3 +5,4 @@ flask-jwt-extended
 python-dotenv
 werkzeug
 gunicorn
+dnspython==2.3.0
