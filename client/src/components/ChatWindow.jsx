@@ -40,11 +40,9 @@ export default function ChatWindow({
         minHeight: "600px",
         display: "flex",
         flexDirection: "column",
-        paddingTop: "30px", // Adjusted to give the top some breathing room without a header
+        paddingTop: "30px",
       }}
     >
-      {/* Redundant header removed as requested */}
-
       <div
         style={{
           flex: 1,
@@ -53,11 +51,12 @@ export default function ChatWindow({
           paddingRight: "10px",
           display: "flex",
           flexDirection: "column",
-          gap: "8px",
+          gap: "12px", // Increased gap slightly to accommodate names
         }}
       >
         {messages.map((msg) => {
           const isStudent = msg.sender_id === studentId;
+          const displayName = isStudent ? studentName : tutorName;
 
           return (
             <div
@@ -67,6 +66,20 @@ export default function ChatWindow({
                 maxWidth: "75%",
               }}
             >
+              {/* Name Tag back above the bubble */}
+              <span
+                style={{
+                  display: "block",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  color: "#897e04",
+                  marginBottom: "4px",
+                  textAlign: isStudent ? "left" : "right",
+                }}
+              >
+                {displayName}
+              </span>
+
               <div
                 className="chat-bubble"
                 style={{
