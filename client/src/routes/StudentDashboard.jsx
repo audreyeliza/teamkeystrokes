@@ -24,20 +24,20 @@ export default function StudentDashboard() {
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h2>Student dashboard</h2>
+      <h2>Dashboard</h2>
       {matches.length === 0 && <p>No matches yet.</p>}
       <ul>
         {matches.map((m) => (
           <li key={m.id} style={{ marginBottom: "0.75rem" }}>
             <span>
-              Match with tutor {m.tutor_id} – status: {m.status}
+              Tutor chat with {m.tutor_name} – {m.status}
             </span>
             {m.status === "accepted" && (
               <button
                 style={{ marginLeft: "0.5rem" }}
                 onClick={() => goToChat(m.id)}
               >
-                Open chat
+                Open Chat
               </button>
             )}
           </li>

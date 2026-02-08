@@ -31,11 +31,11 @@ export default function Login() {
 
   return (
     <div style={{ maxWidth: 400, margin: "2rem auto" }}>
-      <h2>Log in</h2>
+      <h2>Log In</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email</label>
+          <label>Email: </label>
           <input
             name="email"
             type="email"
@@ -45,7 +45,7 @@ export default function Login() {
           />
         </div>
         <div style={{ marginTop: "0.5rem" }}>
-          <label>Password</label>
+          <label>Password: </label>
           <input
             name="password"
             type="password"
@@ -55,7 +55,7 @@ export default function Login() {
           />
         </div>
         <button style={{ marginTop: "1rem" }} type="submit">
-          Log in
+          Log In
         </button>
       </form>
     </div>

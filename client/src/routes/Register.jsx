@@ -39,11 +39,11 @@ export default function Register() {
 
   return (
     <div style={{ maxWidth: 400, margin: "2rem auto" }}>
-      <h2>Create account</h2>
+      <h2>Create Account</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Name</label>
+          <label>Name: </label>
           <input
             name="name"
             value={form.name}
@@ -52,7 +52,7 @@ export default function Register() {
           />
         </div>
         <div style={{ marginTop: "0.5rem" }}>
-          <label>Email</label>
+          <label>Email: </label>
           <input
             name="email"
             type="email"
@@ -62,7 +62,7 @@ export default function Register() {
           />
         </div>
         <div style={{ marginTop: "0.5rem" }}>
-          <label>Password</label>
+          <label>Password: </label>
           <input
             name="password"
             type="password"
@@ -72,14 +72,14 @@ export default function Register() {
           />
         </div>
         <div style={{ marginTop: "0.5rem" }}>
-          <label>Role</label>
+          <label>Role: </label>
           <select name="role" value={form.role} onChange={handleChange}>
             <option value="student">Parent/Student</option>
             <option value="tutor">Tutor</option>
           </select>
         </div>
         <div style={{ marginTop: "0.5rem" }}>
-          <label>City</label>
+          <label>City: </label>
           <input
             name="city"
             value={form.city}
@@ -88,16 +88,11 @@ export default function Register() {
           />
         </div>
         <div style={{ marginTop: "0.5rem" }}>
-          <label>ZIP</label>
-          <input
-            name="zip"
-            value={form.zip}
-            onChange={handleChange}
-            required
-          />
+          <label>ZIP: </label>
+          <input name="zip" value={form.zip} onChange={handleChange} required />
         </div>
         <button style={{ marginTop: "1rem" }} type="submit">
-          Sign up
+          Sign Up
         </button>
       </form>
     </div>

@@ -27,7 +27,7 @@ export default function SearchTutors() {
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h2>Find a tutor</h2>
+      <h2>Find a Tutor</h2>
       <FilterBar
         filters={filters}
         setFilters={setFilters}

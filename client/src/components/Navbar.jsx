@@ -7,7 +7,7 @@ export default function Navbar() {
 
   return (
     <nav style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #ddd" }}>
-      <Link to="/">Tutor Match</Link>
+      <Link to="/">TutorMatch</Link>
       <span style={{ marginLeft: "1rem" }} />
       {user ? (
         <>
@@ -26,14 +26,14 @@ export default function Navbar() {
             </>
           )}
           <button style={{ marginLeft: "1rem" }} onClick={logout}>
-            Log out
+            Log Out
           </button>
         </>
       ) : (
         <>
-          <Link to="/login">Log in</Link>
+          <Link to="/login">Log In</Link>
           <span style={{ marginLeft: "0.5rem" }} />
-          <Link to="/register">Sign up</Link>
+          <Link to="/register">Sign Up</Link>
         </>
       )}
     </nav>
