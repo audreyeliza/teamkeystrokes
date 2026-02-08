@@ -39,9 +39,9 @@ export default function LandingPage() {
           offering service, bolstering local community in the process. Students
           can quickly find tutors that fit their needs, budget, and schedule,
           while tutors can connect with students who are interested. Our goal is
-          simple: make tutoring more transparent, efficient, and connective—
-          because finding the right tutor shouldn’t feel harder than the subject
-          itself.
+          simple: make tutoring more transparent, efficient, and
+          connective—because finding the right tutor shouldn’t feel harder than
+          the subject itself.
         </p>
       </section>
     </div>
