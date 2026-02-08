@@ -17,7 +17,7 @@ def create_app():
 
     # CORS: allow only the deployed frontend origin
     CORS(
-        app, d
+        app,
         resources={r"/api/*": {"origins": app.config["FRONTEND_ORIGIN"]}},
         supports_credentials=True,
         allow_headers=["Content-Type", "Authorization"],
