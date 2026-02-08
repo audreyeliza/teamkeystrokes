@@ -9,7 +9,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    app.config["MONGO_URI"] = Config.MONGODB_URI
+    app.config["MONGO_URI"] = Config.MONGO_URI
     app.config["JWT_SECRET_KEY"] = Config.JWT_SECRET_KEY
 
     mongo.init_app(app)
@@ -17,7 +17,7 @@ def create_app():
 
     # CORS: allow only the deployed frontend origin
     CORS(
-        app,
+        app, d
         resources={r"/api/*": {"origins": app.config["FRONTEND_ORIGIN"]}},
         supports_credentials=True,
         allow_headers=["Content-Type", "Authorization"],
