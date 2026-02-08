@@ -36,18 +36,14 @@ export default function ChatWindow({
   return (
     <div
       className="ui-card"
-      style={{ minHeight: "600px", display: "flex", flexDirection: "column" }}
+      style={{
+        minHeight: "600px",
+        display: "flex",
+        flexDirection: "column",
+        paddingTop: "30px", // Adjusted to give the top some breathing room without a header
+      }}
     >
-      <h3
-        style={{
-          borderBottom: "1px solid #eee",
-          paddingBottom: "15px",
-          marginBottom: "20px",
-          color: "#897e04",
-        }}
-      >
-        Chat with {studentName}
-      </h3>
+      {/* Redundant header removed as requested */}
 
       <div
         style={{
@@ -57,7 +53,7 @@ export default function ChatWindow({
           paddingRight: "10px",
           display: "flex",
           flexDirection: "column",
-          gap: "8px", // Slightly tighter gap for a cleaner look
+          gap: "8px",
         }}
       >
         {messages.map((msg) => {
@@ -83,7 +79,7 @@ export default function ChatWindow({
                     ? "4px solid #897e04"
                     : "1px solid #eee",
                   boxShadow: "0 2px 5px rgba(0,0,0,0.02)",
-                  textAlign: "left", // Keeping text left-aligned inside bubbles for readability
+                  textAlign: "left",
                 }}
               >
                 <div style={{ fontSize: "1rem", lineHeight: "1.4" }}>
