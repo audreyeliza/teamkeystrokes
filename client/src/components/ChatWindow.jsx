@@ -2,48 +2,52 @@ import React, { useEffect, useState } from "react";
 import { getMessages, sendMessage } from "../services/messageApi";
 import MessageInput from "./MessageInput";
 
-export default function ChatWindow({ matchId }) {
+export default function ChatWindow({
+  matchId,
+  studentId,
+  tutorId,
+  studentName,
+  tutorName,
+}) {
   const [messages, setMessages] = useState([]);
 
-  const loadMessages = async () => {
-    try {
-      const res = await getMessages(matchId);
-      setMessages(res.messages || []);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   useEffect(() => {
-    if (!matchId) return;
+    async function loadMessages() {
+      try {
+        const data = await getMessages(matchId); // { messages: [...] }
+        setMessages(data.messages || []);
+      } catch (err) {
+        console.error("Failed to load messages", err);
+      }
+    }
     loadMessages();
-    const interval = setInterval(loadMessages, 3000);
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matchId]);
 
   const handleSend = async (text) => {
-    await sendMessage(matchId, text);
-    await loadMessages();
+    try {
+      await sendMessage(matchId, text); // { id }
+      const data = await getMessages(matchId);
+      setMessages(data.messages || []);
+    } catch (err) {
+      console.error("Failed to send message", err);
+    }
   };
 
   return (
     <div>
-      <div
-        style={{
-          border: "1px solid #ccc",
-          padding: "0.5rem",
-          height: "300px",
-          overflowY: "auto",
-        }}
-      >
-        {messages.map((m) => (
-          <div key={m.id} style={{ marginBottom: "0.25rem" }}>
-            <strong>{m.sender_id}: </strong>
-            <span>{m.text}</span>
-          </div>
-        ))}
+      <div style={{ marginBottom: "1rem" }}>
+        {messages.map((msg) => {
+          const isStudent = msg.sender_id === studentId;
+          const displayName = isStudent ? studentName : tutorName;
+
+          return (
+            <div key={msg.id || msg._id}>
+              {displayName}: {msg.text}
+            </div>
+          );
+        })}
       </div>
+
       <MessageInput onSend={handleSend} />
     </div>
   );
