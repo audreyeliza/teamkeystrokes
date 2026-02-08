@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import LandingPage from "./routes/LandingPage";
@@ -10,6 +10,9 @@ import StudentDashboard from "./routes/StudentDashboard";
 import TutorProfilePage from "./routes/TutorProfilePage";
 import MatchChatPage from "./routes/MatchChatPage";
 import { useAuth } from "./context/AuthContext";
+
+// Import the CSS containing the loader and fade animations
+import "./index.css";
 
 function ProtectedRoute({ children, allowedRoles }) {
   const { user } = useAuth();
@@ -24,8 +27,37 @@ function ProtectedRoute({ children, allowedRoles }) {
 }
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Set a timer to match your animation duration
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 4000); 
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // 1. Show the Loader Screen first
+  if (loading) {
+    return (
+      <div className="loader-screen">
+        <div className="circle-wrapper">
+          <div className="book">
+            <div className="book__page"></div>
+            <div className="book__page"></div>
+            <div className="book__page"></div>
+          </div>
+          {/* Ensure /logo.png is in your /public folder */}
+          <img src="/logo.png" width="200" alt="Loading Logo" />
+        </div>
+      </div>
+    );
+  }
+
+  // 2. Once loading is false, show the Navbar and Routes
   return (
-    <>
+    <div className="main-site">
       <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -80,6 +112,6 @@ export default function App() {
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </>
+    </div>
   );
 }
