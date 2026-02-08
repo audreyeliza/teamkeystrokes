@@ -4,7 +4,6 @@ import { updateMatch } from "../services/matchApi";
 
 export default function MatchList({ matches, onUpdated }) {
   const navigate = useNavigate();
-
   const openChat = (id) => navigate(`/matches/${id}/chat`);
 
   const handleAccept = async (id) => {
@@ -21,7 +20,7 @@ export default function MatchList({ matches, onUpdated }) {
   }
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
       {matches.map((m) => (
         <div
           key={m.id}
@@ -30,28 +29,38 @@ export default function MatchList({ matches, onUpdated }) {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "15px 25px",
+            padding: "15px 24px",
           }}
         >
           <div>
-            <strong style={{ color: "#897e04" }}>{m.student_name}</strong>
+            <strong style={{ fontSize: "1.1rem" }}>{m.student_name}</strong>
             <span
-              style={{ marginLeft: "10px", fontSize: "14px", color: "#666" }}
+              style={{
+                marginLeft: "12px",
+                fontSize: "0.85rem",
+                color: "#888",
+                textTransform: "uppercase",
+              }}
             >
-              ({m.status})
+              • {m.status}
             </span>
           </div>
 
           <div style={{ display: "flex", gap: "10px" }}>
             {m.status === "pending" && (
-              <button className="btn-gold" onClick={() => handleAccept(m.id)}>
+              <button
+                className="nav-btn"
+                style={{ padding: "6px 15px", backgroundColor: "#666" }}
+                onClick={() => handleAccept(m.id)}
+              >
                 Accept
               </button>
             )}
             <button
-              className="btn-gold"
+              className="nav-btn"
               style={{
-                backgroundColor: m.status === "accepted" ? "#897e04" : "#ccc",
+                padding: "6px 15px",
+                opacity: m.status !== "accepted" ? 0.5 : 1,
               }}
               onClick={() => openChat(m.id)}
               disabled={m.status !== "accepted"}

@@ -34,33 +34,46 @@ export default function ChatWindow({
   };
 
   return (
-    <div className="ui-card">
-      <div
+    <div
+      className="ui-card"
+      style={{ minHeight: "500px", display: "flex", flexDirection: "column" }}
+    >
+      <h3
         style={{
-          marginBottom: "1.5rem",
-          maxHeight: "400px",
-          overflowY: "auto",
+          borderBottom: "1px solid #eee",
+          paddingBottom: "15px",
+          marginBottom: "20px",
         }}
       >
-        {messages.length === 0 ? (
-          <p style={{ color: "#999" }}>No messages yet...</p>
-        ) : (
-          messages.map((msg) => {
-            const isStudent = msg.sender_id === studentId;
-            const displayName = isStudent ? studentName : tutorName;
-            return (
-              <div key={msg.id || msg._id} className="chat-bubble">
-                <small style={{ color: "#897e04", fontWeight: "bold" }}>
-                  {displayName}
-                </small>
-                <div style={{ marginTop: "4px" }}>{msg.text}</div>
-              </div>
-            );
-          })
-        )}
+        Conversation with {studentName}
+      </h3>
+
+      <div
+        style={{
+          flex: 1,
+          marginBottom: "1.5rem",
+          overflowY: "auto",
+          paddingRight: "10px",
+        }}
+      >
+        {messages.map((msg) => {
+          const isStudent = msg.sender_id === studentId;
+          const displayName = isStudent ? studentName : tutorName;
+
+          return (
+            <div key={msg.id || msg._id} className="chat-bubble">
+              <strong style={{ color: "#897e04", fontSize: "0.8rem" }}>
+                {displayName}
+              </strong>
+              <div style={{ marginTop: "4px" }}>{msg.text}</div>
+            </div>
+          );
+        })}
       </div>
 
-      <MessageInput onSend={handleSend} />
+      <div style={{ borderTop: "1px solid #eee", paddingTop: "20px" }}>
+        <MessageInput onSend={handleSend} />
+      </div>
     </div>
   );
 }
