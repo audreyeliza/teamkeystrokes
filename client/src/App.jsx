@@ -33,7 +33,7 @@ export default function App() {
     // Set a timer to match your animation duration
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 4000); 
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
