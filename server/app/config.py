@@ -4,7 +4,7 @@ import os
 
 class Config:
     MONGODB_URI = os.getenv(
-        "MONGODB_URI",
+        "MONGO_URI",
         "mongodb://localhost:27017/tutor_match",
     )
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "dev-secret-change")
