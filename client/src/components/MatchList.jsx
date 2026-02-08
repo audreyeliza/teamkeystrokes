@@ -24,8 +24,7 @@ export default function MatchList({ matches, onUpdated }) {
       {matches.map((m) => (
         <li key={m.id} style={{ marginBottom: "0.75rem" }}>
           <span>
-            Match status: {m.status} (student {m.student_name}, tutor{" "}
-            {m.tutor_name})
+            Parent/Student chat with {m.student_name} – {m.status}
           </span>
 
           {m.status === "pending" && (
@@ -42,7 +41,7 @@ export default function MatchList({ matches, onUpdated }) {
             onClick={() => openChat(m.id)}
             disabled={m.status !== "accepted"}
           >
-            Open chat
+            Open Chat
           </button>
         </li>
       ))}

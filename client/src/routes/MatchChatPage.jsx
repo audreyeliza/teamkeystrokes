@@ -16,13 +16,13 @@ export default function MatchChatPage() {
   }, [matchId]);
 
   if (!match) {
-    return <div style={{ padding: "2rem" }}>Loading chat…</div>;
+    return <div style={{ padding: "2rem" }}>Loading chat...</div>;
   }
 
   return (
     <div style={{ padding: "2rem" }}>
       <h2>
-        Chat between {match.student_name} and {match.tutor_name}
+        Chat between {match.tutor_name} and {match.student_name}
       </h2>
       <ChatWindow
         matchId={matchId}

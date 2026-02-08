@@ -58,14 +58,14 @@ export default function FilterBar({ filters, setFilters, onSearch }) {
       <input
         type="number"
         name="minRate"
-        placeholder="Min rate"
+        placeholder="Min hourly rate"
         value={filters.minRate}
         onChange={handleChange}
       />
       <input
         type="number"
         name="maxRate"
-        placeholder="Max rate"
+        placeholder="Max hourly rate"
         value={filters.maxRate}
         onChange={handleChange}
       />

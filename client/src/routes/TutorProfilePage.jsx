@@ -92,10 +92,10 @@ export default function TutorProfilePage() {
 
   return (
     <div style={{ padding: "2rem", maxWidth: 600, margin: "0 auto" }}>
-      <h2>Tutor profile</h2>
+      <h2>Profile</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>City</label>
+          <label>City: </label>
           <input
             name="city"
             value={profile.city || ""}
@@ -104,13 +104,13 @@ export default function TutorProfilePage() {
         </div>
 
         <div style={{ marginTop: "0.5rem" }}>
-          <label>ZIP</label>
+          <label>ZIP: </label>
           <input name="zip" value={profile.zip || ""} onChange={handleChange} />
         </div>
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Subjects
+            Subjects:
           </label>
           <div className="flex flex-wrap gap-2">
             {meta.subjects.map((s) => (
@@ -129,7 +129,7 @@ export default function TutorProfilePage() {
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Age ranges
+            Age Groups:
           </label>
           <div className="flex flex-wrap gap-2">
             {meta.age_groups.map((a) => (
@@ -147,7 +147,7 @@ export default function TutorProfilePage() {
         </div>
 
         <div style={{ marginTop: "0.5rem" }}>
-          <label>Hourly rate</label>
+          <label>Hourly Rate: </label>
           <input
             name="hourly_rate"
             type="number"
@@ -157,7 +157,7 @@ export default function TutorProfilePage() {
         </div>
 
         <div style={{ marginTop: "0.5rem" }}>
-          <label>Bio</label>
+          <label>Bio: </label>
           <textarea
             name="bio"
             value={profile.bio || ""}
@@ -176,7 +176,7 @@ export default function TutorProfilePage() {
         </div>
 
         <button style={{ marginTop: "1rem" }} type="submit">
-          Save profile
+          Save Profile
         </button>
       </form>
     </div>
