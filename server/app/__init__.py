@@ -1,5 +1,3 @@
-# app/__init__.py
-
 from flask import Flask
 from flask_cors import CORS
 
@@ -17,10 +15,10 @@ def create_app():
     mongo.init_app(app)
     jwt.init_app(app)
 
-    # Dev-only wildcard CORS so the browser never blocks
+    # CORS: allow only the deployed frontend origin
     CORS(
         app,
-        resources={r"/api/*": {"origins": "*"}},  # dev-only wildcard
+        resources={r"/api/*": {"origins": app.config["FRONTEND_ORIGIN"]}},
         supports_credentials=True,
         allow_headers=["Content-Type", "Authorization"],
         expose_headers=["Content-Type", "Authorization"],
@@ -38,10 +36,8 @@ def create_app():
     app.register_blueprint(message_bp, url_prefix="/api/messages")
     app.register_blueprint(user_bp, url_prefix="/api/users")
 
-    # Catch-all OPTIONS for any /api/... path
     @app.route("/api/<path:path>", methods=["OPTIONS"])
     def api_options(path):
-        # empty 204; Flask-CORS will attach the CORS headers
         return ("", 204)
 
     @app.get("/api/health")
