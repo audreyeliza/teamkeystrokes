@@ -1,4 +1,3 @@
-// FilterBar.jsx
 import React, { useEffect, useState } from "react";
 import { getMetadata } from "../services/userApi";
 
@@ -11,7 +10,7 @@ export default function FilterBar({ filters, setFilters, onSearch }) {
         const m = await getMetadata();
         setMeta(m);
       } catch (e) {
-        // ignore
+        /* ignore */
       }
     }
     load();
@@ -23,7 +22,15 @@ export default function FilterBar({ filters, setFilters, onSearch }) {
   };
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+    <div
+      className="ui-card"
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "12px",
+        alignItems: "center",
+      }}
+    >
       <input
         name="city"
         placeholder="City"
@@ -58,19 +65,26 @@ export default function FilterBar({ filters, setFilters, onSearch }) {
       <input
         type="number"
         name="minRate"
-        placeholder="Min hourly rate"
+        placeholder="Min $/hr"
+        style={{ width: "120px" }}
         value={filters.minRate}
         onChange={handleChange}
       />
       <input
         type="number"
         name="maxRate"
-        placeholder="Max hourly rate"
+        placeholder="Max $/hr"
+        style={{ width: "120px" }}
         value={filters.maxRate}
         onChange={handleChange}
       />
 
-      <button type="button" onClick={onSearch}>
+      <button
+        type="button"
+        className="nav-btn"
+        style={{ padding: "8px 20px" }}
+        onClick={onSearch}
+      >
         Search
       </button>
     </div>
